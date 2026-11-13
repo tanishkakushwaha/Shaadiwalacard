@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className="dark"><body><a className="skip-link" href="#main">Skip to content</a>{children}<Toaster theme="dark" position="bottom-right" richColors closeButton toastOptions={{ style: { fontFamily: "var(--font-sans)", borderRadius: "12px", background: "var(--card)", color: "var(--foreground)", borderColor: "var(--color-border)" } }} /></body></html>;
+  return <html lang="en" className="dark"><head><script defer data-website-id="te8sg596cuzh" data-domain="shaadiwalacard.vercel.app" src="https://app.trfyx.com/script.js"></script></head><body><a className="skip-link" href="#main">Skip to content</a>{children}<Toaster theme="dark" position="bottom-right" richColors closeButton toastOptions={{ style: { fontFamily: "var(--font-sans)", borderRadius: "12px", background: "var(--card)", color: "var(--foreground)", borderColor: "var(--color-border)" } }} /></body></html>;
 }
