@@ -1,0 +1,1 @@
+export default function Loading() { return <main id="main" role="status" className="flex min-h-[80vh] items-center justify-center gap-3 text-sm text-muted-foreground"><span className="size-5 animate-spin rounded-full border-2 border-primary/20 border-t-primary"/>Gathering the little details…</main>; }

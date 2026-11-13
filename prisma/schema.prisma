@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  weddings     Wedding[]
+}
+
+model Wedding {
+  id           String     @id @default(cuid())
+  slug         String     @unique
+  partnerOne   String
+  partnerTwo   String
+  date         DateTime   @db.Date
+  time         String     @default("18:00")
+  venue        String
+  city         String
+  message      String     @default("")
+  deadline     DateTime?  @db.Date
+  isOpen       Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  ownerId      String
+  owner        User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  responses    Response[]
+
+  @@index([ownerId, createdAt])
+}
+
+model Response {
+  id           String   @id @default(cuid())
+  name         String
+  attending    Boolean
+  guests       Int      @default(1)
+  message      String   @default("")
+  tokenHash    String
+  weddingId    String
+  wedding      Wedding  @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([weddingId, tokenHash])
+  @@index([weddingId, updatedAt])
+}
+
+model RateLimit {
+  id        String   @id
+  count     Int      @default(1)
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
